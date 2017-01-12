@@ -5,6 +5,7 @@ import {
 	StyleSheet,
     Image,
     Dimensions,
+    AppState,
     ScrollView,
 } from 'react-native';
 import clrs from '../utils/Clrs';
@@ -18,6 +19,9 @@ import LinearGradient from 'react-native-linear-gradient';
 const {height, width} = Dimensions.get('window');
 import {Grid, Col, Row} from 'react-native-elements';
 import Prices from './Prices';
+import PushNotification from 'react-native-push-notification';
+
+import PushController from './PushController';
 
 export default class Home extends Component {
     constructor(props){
@@ -27,8 +31,26 @@ export default class Home extends Component {
             selectedBase : 'BTC',
             favorite:[]
         };
+        this.handleAppStateChagne = this.handleAppStateChagne.bind(this);
         this.updateIndex = this.updateIndex.bind(this);
         this.buttons = ['BTC', 'ETH', 'XMR', 'USDT'];
+    }
+
+    componentDidMount(){
+        AppState.addEventListener('change', this.handleAppStateChagne);
+    };
+
+    componentWillUnmount(){
+        AppState.addEventListener('change', this.handleAppStateChagne);
+    };
+
+    handleAppStateChagne(appState){
+        if(appState === 'background'){
+            PushNotification.localNotificationSchedule({
+              message: "My Notification Message", // (required)
+              date: new Date(Date.now() + (5 * 1000)) // in 60 secs
+            });
+        }
     }
 
     updateIndex (selectedIndex) {
@@ -74,7 +96,6 @@ export default class Home extends Component {
         }
         return (
             <View style={styles.page}>
-
                 {this.state.favorite.length ? <View style={styles.favoriteCurrency}>
                     <ScrollView>
                         {this.state.favorite.map(createFavorite)}
@@ -87,7 +108,7 @@ export default class Home extends Component {
                   buttons={this.buttons}
                   containerStyle={{height:35, marginTop:10}} />
                 <Prices showBase = {this.state.selectedBase} addFavorite={(data) => this.addFavorite(data)} />
-
+                <PushController />
             </View>
             
         );    

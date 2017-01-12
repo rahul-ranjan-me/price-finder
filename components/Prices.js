@@ -124,7 +124,7 @@ export class TableRows extends Component{
 
 			return percentChange < 0 ? 
 				<Text style={{color:'#c02a1d', fontSize:15}}>{percentChange}</Text> :
-				<Text style={{color:'#27892f', fontSize:15}}>{percentChange}</Text>;
+				<Text style={{color:'#27892f', fontSize:15}}>+{percentChange}</Text>;
 		}
 		return(
 			<View style={styles.tableRows}>

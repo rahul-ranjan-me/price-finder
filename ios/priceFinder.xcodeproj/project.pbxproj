@@ -885,8 +885,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/priceFinder.app/priceFinder";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -903,8 +901,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/priceFinder.app/priceFinder";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;
